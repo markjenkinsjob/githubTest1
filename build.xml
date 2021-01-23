@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Compiling and Running java class" default="build" basedir="." >
+    <description>
+    	Sample Build for Tests!
+    </description>
+    <property name="src" value="src" />
+	<property name="build" value="build" />
+	<property name="lib" value="release/lib" />
+	<property name="project" value="MyAntBuild" />
+	<property name="version" value="1.0" />
+	
+	<property name="TRAINING_PROPERTIES" value="../build/local.properties" />
+    
+    
+    <target name="_loadprops" description="loads .properties files">
+    	<echo>Loads .properties files</echo>
+    	<echo></echo>
+    	<echo>Loading properties from "${TRAINING_PROPERTIES}"</echo>
+    	<property file="${TRAINING_PROPERTIES}" />
+    	<echo>Loading: "${TRAINING_HOME_BASE}"</echo>
+    </target>
+    
+    
+    <target name="init" depends="_loadprops">
+    	<!-- Create directories -->
+		<mkdir dir="build"></mkdir>
+    	<mkdir dir="release/lib"></mkdir>
+	</target>
+    
+    <target name="compile" depends="init">
+		<javac includeantruntime="false" srcdir="${src}" destdir="${build}" />
+	</target>
+	
+	<target name="build" depends="compile">
+		<jar destfile="${lib}/${project}.jar" basedir="${build}"/>
+	</target>
+	
+	<target name="help">
+		<echo>This is Me!</echo>
+	</target>
+	
+</project>
